@@ -8,4 +8,15 @@
 6- deletion of linked list element at middle is O(n) because you just need to change the pointers and traverse the list
 7- searching in linked list is O(n) because you need to traverse the list 
 
+
+how node look like in  linked list in javascript
+let previousNode={
+value:0,
+next:newNode
+}
+ 
+let newNode={
+value:1,
+next:null
+}
 */
