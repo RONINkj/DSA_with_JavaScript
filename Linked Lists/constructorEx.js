@@ -1,9 +1,11 @@
+// create a class Node with a constructor that initializes the value and next properties of the node
 class Node {
   constructor(value) {
     this.value = value;
     this.next = null;
   }
 }
+// create a class LinkedList with a constructor that initializes the head, tail, and length properties of the linked list
 class LinkedList {
   constructor(value) {
     const newNode = new Node(value);
