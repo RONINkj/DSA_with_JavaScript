@@ -1,3 +1,4 @@
+    
 class Node {
     constructor(value){
         this.value = value;
@@ -123,6 +124,21 @@ class LinkedList {
         } 
             return false
     }
+    insertNodeAtIndex(index,value){
+        if ( index===0) {
+            return this.insertAtBeginning(value)
+        }else if ( index===this.length) {
+            return this.push(value)
+        }else if ( index<0 || index >this.length) {
+            return false
+        }
+        const newNode=new Node(value)
+        const temp=this.searchAnNode(index-1)
+        newNode.next=temp.next
+        temp.next=newNode 
+        this.length++
+        return true 
+    }
     
 }
 function test() {
@@ -130,13 +146,11 @@ function test() {
     myLinkedList.push(3)
     myLinkedList.push(23)
     myLinkedList.push(7)
-    console.log("Linked List before set():");
-    myLinkedList.printList();
-    
-    myLinkedList.changeTheValue(2, 99);
-    
-    console.log("\nLinked List after set():");
-    myLinkedList.printList();
+    myLinkedList.printList()
+    myLinkedList.insertNodeAtIndex(3,24)
+    myLinkedList.insertNodeAtIndex(4,24)
+    myLinkedList.printList()
+
      
 }
 
