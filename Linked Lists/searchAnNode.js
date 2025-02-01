@@ -105,32 +105,27 @@ class LinkedList {
         }
         return temp
     }
-}
- 
+    searchAnNode(index){
+        if (index<0 || index>=this.length) {
+            return undefined
+        }
+        let temp=this.head
+        for (let i = 0; i <index; i++) {
+                temp=temp.next
+        }
+        return temp
 
+    }
+}
 function test() {
-    let myLinkedList = new LinkedList(2);
-    myLinkedList.push(1)
-        // (2) Items in LL - Returns 2 Node
-        if (myLinkedList.length !== 0) {
-            console.log(myLinkedList.deletionAtBeginning().value);
-        } else {
-            console.log("null");
-        }
-    
-        // (1) Item in LL - Returns 1 Node
-        if (myLinkedList.length !== 0) {
-            console.log(myLinkedList.deletionAtBeginning().value);
-        } else {
-            console.log("null");
-        }
-    
-        // (0) Items in LL - Returns null
-        if (myLinkedList.length !== 0) {
-            console.log(myLinkedList.deletionAtBeginning().value);
-        } else {
-            console.log("null");
-        }    
+    let myLinkedList = new LinkedList(1);
+    myLinkedList.push(2)
+    myLinkedList.push(3)
+    myLinkedList.push(4)
+    console.log(myLinkedList.searchAnNode(3).value)
+    console.log(myLinkedList.searchAnNode(-1))
+    console.log(myLinkedList.searchAnNode(2).value)
+     
 }
 
 
