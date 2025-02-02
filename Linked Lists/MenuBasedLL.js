@@ -1,11 +1,11 @@
-const readline = require("readline-sync"); 
+const readline = require("readline-sync");
 class Node {
-    constructor(value){
+    constructor(value) {
         this.value = value;
         this.next = null;
     }
 }
- 
+
 class LinkedList {
     constructor(value) {
         const newNode = new Node(value);
@@ -16,10 +16,14 @@ class LinkedList {
 
     printList() {
         let temp = this.head;
-        console.log("Linked List:");
-        while (temp !== null) {
-            console.log(temp.value);
-            temp = temp.next;
+        if ( temp===null) {
+            console.log(`Linked is Empty.`);
+        }else{
+            console.log("Linked List:");
+            while (temp !== null) {
+                console.log(temp.value);
+                temp = temp.next;
+            }
         }
     }
 
@@ -48,127 +52,131 @@ class LinkedList {
         this.tail = null;
         this.length = 0;
     }
-    push(value){
-        const newNode=new Node(value)
-        if(!this.head){
-            this.head=newNode;
-            this.tail=newNode;
-        }else{
-            this.tail.next=newNode;
-            this.tail=newNode;
+    push(value) {
+        const newNode = new Node(value)
+        if (!this.head) {
+            this.head = newNode;
+            this.tail = newNode;
+        } else {
+            this.tail.next = newNode;
+            this.tail = newNode;
         }
         this.length++
         return this;
     }
-    pop(){
+    pop() {
         if (!this.head) {
-            return undefined;
+            return `Linked List is Empty.`
         }
-        let temp=this.head
-        let prv=this.head
-        while(temp.next){
-            prv=temp
-            temp=temp.next
+        let temp = this.head
+        let prv = this.head
+        while (temp.next) {
+            prv = temp
+            temp = temp.next
         }
-        this.tail=prv
-        this.tail.next=null
+        this.tail = prv
+        this.tail.next = null
         this.length--
-        if(this.length===0){
-            this.head=null
-            this.tail=null
-        } 
+        if (this.length === 0) {
+            this.head = null
+            this.tail = null
+        }
         return temp
     }
 
-    insertAtBeginning(value){
-        const newNode=new Node(value)
+    insertAtBeginning(value) {
+        const newNode = new Node(value)
         if (!this.head) {
-            this.head=newNode
-            this.tail=newNode
-        }else{
-            newNode.next=this.head
-            this.head=newNode
+            this.head = newNode
+            this.tail = newNode
+        } else {
+            newNode.next = this.head
+            this.head = newNode
         }
         this.length++
         return this
     }
 
-    deletionAtBeginning(){
+    deletionAtBeginning() {
         if (!this.head) {
-            return undefined
+            return `Linked List is Empty`
         }
-        let temp=this.head
-        this.head=this.head.next
-        temp.next=null
+        let temp = this.head
+        this.head = this.head.next
+        temp.next = null
         this.length--
-        if(this.length===0){
-            this.tail=null
+        if (this.length === 0) {
+            this.tail = null
         }
         return temp
     }
-    searchAnNode(index){
-        if (index<0 || index>=this.length) {
-            return undefined
+    searchAnNode(index) {
+        if (index < 0 || index >= this.length) {
+            return `Error: Index out of bounds.`
         }
-        let temp=this.head
-        for (let i = 0; i <index; i++) {
-                temp=temp.next
+        let temp = this.head
+        for (let i = 0; i < index; i++) {
+            temp = temp.next
         }
         return temp
     }
-    changeTheValue(index,value){
-        let temp =this.searchAnNode(index)
+    changeTheValue(index, value) {
+        let temp = this.searchAnNode(index)
         if (temp) {
-            temp.value=value
+            temp.value = value
             return true
-        } 
-            return false
+        }
+        return false
     }
-    insertNodeAtIndex(index,value){
-        if ( index===0) {
+    insertNodeAtIndex(index, value) {
+        if (index === 0) {
             return this.insertAtBeginning(value)
-        }else if ( index===this.length) {
+        } else if (index === this.length) {
             return this.push(value)
-        }else if ( index<0 || index >this.length) {
+        } else if (index < 0 || index > this.length) {
             return false
         }
-        const newNode=new Node(value)
-        const temp=this.searchAnNode(index-1)
-        newNode.next=temp.next
-        temp.next=newNode 
+        const newNode = new Node(value)
+        const temp = this.searchAnNode(index - 1)
+        newNode.next = temp.next
+        temp.next = newNode
         this.length++
-        return true 
+        return true
     }
-    removeAtIndex(index){
-        if (index===0) {
-            return this.deletionAtBeginning()            
-        }else if (index===this.length-1) {
-            return this.pop()            
-        }else if (index<0 || index>= this.length) {
-            return undefined
+    removeAtIndex(index) {
+        if (index === 0) {
+            return this.deletionAtBeginning()
+        } else if (index === this.length - 1) {
+            return this.pop()
+        } else if (index < 0 || index >= this.length) {
+            return `Error: Index out of bounds.`
         }
-        const prv=this.searchAnNode(index-1)
-        const temp=prv.next
-        prv.next=temp.next
-        temp.next=null
+        const prv = this.searchAnNode(index - 1)
+        const temp = prv.next
+        prv.next = temp.next
+        temp.next = null
         this.length--
         return temp
     }
-    reverse(){
-        let temp=this.head
-        this.head=this.tail
-        this.tail=temp
-        let next =temp.next
-        let prv=null
-        for (let i = 0; i < this.length; i++) {
-            next=temp.next
-            temp.next=prv
-            prv=temp
-            temp=next 
+    reverse() {
+        if (!this.head || this.length <= 1) {
+            console.log("List is empty or has only one element. No need to reverse.");
+            return this;
         }
-        return this 
+        let temp = this.head
+        this.head = this.tail
+        this.tail = temp
+        let next = temp.next
+        let prv = null
+        for (let i = 0; i < this.length; i++) {
+            next = temp.next
+            temp.next = prv
+            prv = temp
+            temp = next
+        }
+        return this
     }
-    
+
 }
 function Menu() {
     let myLinkedList = new LinkedList(11);
@@ -179,48 +187,59 @@ function Menu() {
         console.log("2: Remove Element:");
         console.log("3: Insert Element at index:");
         console.log("4: Remove Element at index:");
-        console.log("5: Print List:");
-        console.log("6: Get Head:");
-        console.log("7: Get Tail:");
-        console.log("8: Get Length:");
-        console.log("9: Get Reverse List:");
-        console.log("10: Empty List:");
+        console.log("5: Search an Node By Index:");
+        console.log("6: Change the value at index:");
+        console.log("7: Print List:");
+        console.log("8: Get Head:");
+        console.log("9: Get Tail:");
+        console.log("10: Get Length:");
+        console.log("11: Get Reverse List:");
+        console.log("12: Empty List:");
         console.log("0: Exit:");
-        ch=parseInt(readline.question("Enter your Choice:"));
-        switch(ch){
+        ch = parseInt(readline.question("Enter your Choice:"));
+        switch (ch) {
             case 1:
-                let value=parseInt(readline.question("Enter the value to add:"));
+                let value = parseInt(readline.question("Enter the value to add:"));
                 myLinkedList.push(value);
                 break;
             case 2:
                 console.log(`Removed Element:${myLinkedList.pop().value}`);
                 break;
             case 3:
-                let index=parseInt(readline.question("Enter index: "));
-                let insertValue=parseInt(readline.question("Enter the value to insert:"));
-                myLinkedList.insertNodeAtIndex(index,insertValue);
+                let index = parseInt(readline.question("Enter index: "));
+                let insertValue = parseInt(readline.question("Enter the value to insert:"));
+                myLinkedList.insertNodeAtIndex(index, insertValue);
                 break;
             case 4:
-                let removeIndex=parseInt(readline.question("Enter the index to remove:"));
-                console.log(`Removed Element:${myLinkedList.removeAtIndex().value}`);
+                let removeIndex = parseInt(readline.question("Enter the index to remove:"));
+                console.log(`Removed Element:${myLinkedList.removeAtIndex(removeIndex).value}`);
                 break;
             case 5:
-                myLinkedList.printList();
+                let ind = parseInt(readline.question("Enter index: "));
+                console.log(`The Node at ${ind} index is ${myLinkedList.searchAnNode(ind).value}`)
                 break;
             case 6:
-                myLinkedList.getHead();
+                let inde = parseInt(readline.question("Enter index: "));
+                let val = parseInt(readline.question("Enter the value to insert:"));
+                myLinkedList.changeTheValue(inde,val); 
                 break;
             case 7:
-                myLinkedList.getTail();
+                myLinkedList.printList();
                 break;
             case 8:
-                myLinkedList.getLength();
+                myLinkedList.getHead();
                 break;
             case 9:
+                myLinkedList.getTail();
+                break;
+            case 10:
+                myLinkedList.getLength();
+                break;
+            case 11:
                 myLinkedList.reverse();
                 console.log("List Reverse.");
                 break;
-            case 10:
+            case 12:
                 myLinkedList.makeEmpty();
                 console.log("List Cleared.");
                 break;
@@ -232,7 +251,7 @@ function Menu() {
                 break;
 
         }
-    } while ( ch!==0);
+    } while (ch !== 0);
 }
 
 
