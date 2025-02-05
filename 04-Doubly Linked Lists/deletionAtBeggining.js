@@ -1,19 +1,19 @@
 // Doubly Linked Lists  
 
-class Node{
-    constructor(value){
-        this.value=value;
-        this.next=null;
-        this.prv=null;
+class Node {
+    constructor(value) {
+        this.value = value;
+        this.next = null;
+        this.prv = null;
     }
 }
 
-class DoublyLinkedLists{
-    constructor(value){
-    const newNode=new Node(value);
-    this.head=newNode;
-    this.tail=newNode;
-    this.length=1;
+class DoublyLinkedLists {
+    constructor(value) {
+        const newNode = new Node(value);
+        this.head = newNode;
+        this.tail = newNode;
+        this.length = 1;
     }
 
     printList() {
@@ -44,104 +44,94 @@ class DoublyLinkedLists{
     getLength() {
         console.log("Length: " + this.length);
     }
-    
-    push(value){
-        const newNode=new Node(value);
+
+    push(value) {
+        const newNode = new Node(value);
         if (!this.head) {
-            this.head=newNode;
-            this.tail=newNode;
-        }else{
-            this.tail.next=newNode;
-            newNode.prv=this.tail;
-            this.tail=newNode;
+            this.head = newNode;
+            this.tail = newNode;
+        } else {
+            this.tail.next = newNode;
+            newNode.prv = this.tail;
+            this.tail = newNode;
         }
         this.length++;
         return this;
     }
 
-    pop(){
+    pop() {
         if (!this.head) {
             return "Lists is Empty";
         }
-        let temp=this.tail;
-        if (this.length===1) {
-            this.head=null
-        }else{
-            this.tail=temp.prv;
-            this.tail.next=null;
-            temp.prv=null;
+        let temp = this.tail;
+        if (this.length === 1) {
+            this.head = null
+        } else {
+            this.tail = temp.prv;
+            this.tail.next = null;
+            temp.prv = null;
         }
         this.length--;
         return temp;
     }
-    
-    insertionAtBegginning(value){
-        const newNode=new Node(value);
+
+    insertionAtBegginning(value) {
+        const newNode = new Node(value);
         if (!this.head) {
-            this.head=newNode;
-            this.tail=newNode;
-        }else{
-            newNode.next=this.head;
-            this.head.prv=newNode;
-            this.head=newNode;
+            this.head = newNode;
+            this.tail = newNode;
+        } else {
+            newNode.next = this.head;
+            this.head.prv = newNode;
+            this.head = newNode;
         }
         this.length++;
         return this;
-        
+
     }
-    // deletionAtBegginning(){
-    //     if (!this.head) {
-    //         return "Lists is Empty";
-    //     }
-    //     let temp=this.tail;
-    //     if (this.length===1) {
-    //         this.head=null
-    //     }else{
-    //         this.tail=temp.prv;
-    //         this.tail.next=null;
-    //         temp.prv=null;
-    //     }
-    //     this.length--;
-    //     return temp;
-    // }
-    
-    // deletionAtBegginning(){
-        //     if (!this.head) return "List is empty";
-    //     let temp =this.head;
-    //     this.head=this.head.next;
-    //     temp.next=null;
-    //     this.tail.prv=null;
-    //     this.length--;
-    //     if (this.length===1) {
-    //         this.head=null;
-    //         this.tail=null;
-    //     }
-    //     return temp;
-    // }
+
+    deletionAtBegginning() {
+        if (!this.head) return "List is empty";
+        let temp = this.head;
+        if (this.length === 1) {
+            this.head = null;
+            this.tail = null;
+        }else{
+            this.head = this.head.next;
+            this.head.prv = null;
+            temp.next = null;
+        }
+        this.length--;
+        return temp;
+    }
 }
 
-function test(){
-    const myDoublyLL=new DoublyLinkedLists(7);
+function test() {
+    const myDoublyLL = new DoublyLinkedLists(2);
+    myDoublyLL.push(1);
     myDoublyLL.push(4);
-    console.log("Before unshift():");
-    console.log("-----------------");
-    myDoublyLL.getHead();
-    myDoublyLL.getTail();
-    myDoublyLL.getLength();
+    myDoublyLL.push(5);
+    // (2) Items in LL - Returns 2 Node
+    if (myDoublyLL.length !== 0) {
+        console.log(myDoublyLL.deletionAtBegginning().value);
+    } else {
+        console.log("null");
+    }
 
-    myDoublyLL.printList();
+    // (1) Item in LL - Returns 1 Node
+    if (myDoublyLL.length !== 0) {
+        console.log(myDoublyLL.deletionAtBegginning().value);
+    } else {
+        console.log("null");
+    }
 
-    myDoublyLL.insertionAtBegginning(1);
-
-    console.log("\n\nAfter unshift():");
-    console.log("----------------");
-    myDoublyLL.getHead();
-    myDoublyLL.getTail();
-    myDoublyLL.getLength();
-
-    myDoublyLL.printList();
-    
-    
+    // (0) Items in LL - Returns null
+    if (myDoublyLL.length !== 0) {
+        console.log(myDoublyLL.deletionAtBegginning().value);
+    }else {
+        console.log("null");
+    }   
+    myDoublyLL.printList(); 
 }
 
 test();
