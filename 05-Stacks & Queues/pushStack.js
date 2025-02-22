@@ -43,13 +43,35 @@ class Stack{
         console.log("Length: " + this.length);
     }
 
-    
+    push(value){
+        const newNode=new Node(value);
+        if (!this.top){
+            this.top=newNode;
+        }else{
+        newNode.next=this.top;
+        this.top=newNode;
+        }
+        this.length++;
+        return this;
+    }
 
 }
 
 function test(){
     const myStack =new Stack(10);
-  
+    
+    console.log("Before push():");
+    console.log("--------------");
+    myStack.getTop();
+    myStack.getLength();
+
+    console.log("\nStack:");
+    myStack.printStack();
+
+    myStack.push(1);
+
+    console.log("\n\nAfter push():");
+    console.log("-------------");
     myStack.getTop();
     myStack.getLength();
 
