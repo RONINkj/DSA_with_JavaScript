@@ -64,14 +64,7 @@ class Queue{
         this.length++;
         return this;
     }
-    dequeue(){
-        if(!this.first) return `Queue is Empty`
-        let temp=this.first;
-        this.first =this.first.next;
-        temp=null;
-        this.length--;
-        return temp;
-    }
+    
 
 }
 function Test(){
