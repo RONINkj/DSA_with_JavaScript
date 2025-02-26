@@ -1,37 +1,37 @@
-class Node{
-    constructor(value){
-        this.value=value;
-        this.right=null;
-        this.left=null;
+class Node {
+    constructor(value) {
+        this.value = value;
+        this.right = null;
+        this.left = null;
     }
 }
 
-class BST{
-    constructor(){
-        this.root=null;
+class BST {
+    constructor() {
+        this.root = null;
     }
 
-    insert(value){
-        const newNode=new Node(value);
-        if(!this.root){
-            this.root=newNode;
+    insert(value) {
+        const newNode = new Node(value);
+        if (!this.root) {
+            this.root = newNode;
             return this;
-        }else{
-            let temp =this.root;
+        } else {
+            let temp = this.root;
             while (true) {
-                if ( newNode.value===temp.value) return undefined; 
-                if (temp.value>newNode.value) {
+                if (newNode.value === temp.value) return undefined;
+                if (temp.value > newNode.value) {
                     if (!temp.right) {
-                        temp.right=newNode;
+                        temp.right = newNode;
                         return this;
                     }
-                    temp=temp.right;
-                }else{
+                    temp = temp.right;
+                } else {
                     if (!temp.left) {
-                        temp.left=newNode;
+                        temp.left = newNode;
                         return this;
                     }
-                    temp=temp.left;
+                    temp = temp.left;
                 }
             }
 
@@ -39,8 +39,8 @@ class BST{
     }
 }
 
-function Test(){
-    let myBST=new BST()
+function Test() {
+    let myBST = new BST()
     myBST.insert(2);
     myBST.insert(1);
     myBST.insert(3);
