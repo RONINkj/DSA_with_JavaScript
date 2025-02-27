@@ -37,24 +37,38 @@ class BST {
 
         }
     }
+
+    searchAnNode(value) {
+        if (!this.root) return false
+        let temp = this.root;
+        while (temp) {
+            if (value > temp.value) {
+                temp = temp.right;
+            } else if (value < temp.value) {
+                temp = temp.left;
+            } else {
+                return true
+            }
+        }
+        return false
+    }
 }
 
 function Test() {
     let myBST = new BST()
-    myBST.insert(2);
-    myBST.insert(1);
-    myBST.insert(3);
-
-    /*
-        THE LINES ABOVE CREATE THIS TREE:
-                     2
-                    / \
-                   1   3
-    */
+    myBST.insert(47);
+    myBST.insert(21);
+    myBST.insert(76);
+    myBST.insert(18);
+    myBST.insert(27);
+    myBST.insert(52);
+    myBST.insert(82);
 
 
-    console.log("Root:", myBST.root.value);
-    console.log("\nRoot->Left:", myBST.root.left.value);
-    console.log("\nRoot->Right:", myBST.root.right.value);
+    console.log("BST Contains 27:");
+    console.log(myBST.searchAnNode(27));
+
+    console.log("\nBST Contains 17:");
+    console.log(myBST.searchAnNode(17));
 }
 Test();
