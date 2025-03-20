@@ -66,6 +66,5 @@ function Test() {
     myGraph.removeVertex("E");
     myGraph.printGraph();
 
-
 }
 Test();
