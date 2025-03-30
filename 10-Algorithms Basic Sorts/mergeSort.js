@@ -22,6 +22,13 @@ function merge(arr1, arr2) {
     return combined;
 }
 
-let arr1 = [1, 3, 5, 7, 9];
-let arr2 = [2, 4, 6, 8, 10];
-console.log(merge(arr1, arr2));
+function mergeSort(arr){
+    if(arr.length===1) return arr;
+    let mid=Math.floor(arr.length/2);
+    let left=arr.slice(0,mid);
+    let  right=arr.slice(mid);
+    return merge(mergeSort(left),mergeSort(right));
+}
+
+let arr = [1, 3, 5, 7, 9,2, 4, 6, 8, 10];
+console.log(mergeSort(arr));
