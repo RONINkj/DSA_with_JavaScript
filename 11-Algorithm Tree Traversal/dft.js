@@ -83,6 +83,27 @@ class BST {
         traverse(this.root);
         return res;
     }
+
+    DfsPostOrder(){
+        let res=[];
+        function traverse(currNode){
+            if(currNode.left) traverse(currNode.left);
+            if(currNode.right) traverse(currNode.right);
+            res.push(currNode.value);
+        }
+        traverse(this.root);
+        return res;
+    }
+    DfsInOrder(){
+        let res=[];
+        function traverse(currNode){
+            if(currNode.left)traverse(currNode.left);
+            res.push(currNode.value);
+            if(currNode.right) traverse(currNode.right);
+        }
+        traverse(this.root);
+        return res;
+    }
 }
 
 function Test() {
@@ -97,5 +118,7 @@ function Test() {
     myBST.insert(82);
 
     console.log(myBST.DfsPreOrder()); // [47,21,18,27,76,52,82]
+    console.log(myBST.DfsPostOrder()); // [18,27,21,52,82,76,47]
+    console.log(myBST.DfsInOrder()); // [18,21,27,47,52,76,82]
 }
 Test();
